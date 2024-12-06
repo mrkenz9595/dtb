@@ -1,0 +1,11 @@
+type hidraw_device, dev_type;
+type rcu_voice_data_file, file_type,data_file_type,core_data_file_type;
+allow hal_audio_default device:dir { read open };
+allow hal_audio_default hidraw_device:chr_file {create open read write ioctl};
+# Need to access dir /dev
+# allow to communicate to hidraw's unix_stream_socket
+# allow hal_audio_default hidraw:unix_stream_socket connectto;
+allow system_server device:dir { read open };
+allow system_server hidraw_device:chr_file {open read write ioctl};
+allow system_server rcu_voice_data_file:dir { read open };
+allow system_server rcu_voice_data_file:file { open write read create};
